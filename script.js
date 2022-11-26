@@ -1,6 +1,7 @@
 let tableBody = document.querySelector('tbody');
 let modal = document.querySelector('.modal');
 let modalBtn = document.querySelector('.modal-btn');
+let closeBtn = document.querySelector('.close');
 
 let myLibrary = [];
 
@@ -39,6 +40,12 @@ function removeBookFromLibrary(index) {
     delete myLibrary[index];
 }
 
+// Display modal
 modalBtn.addEventListener('click', () => {
     modal.style.display = 'block';
 });
+
+// Close modal
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+})
