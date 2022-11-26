@@ -4,6 +4,7 @@ let modalBtn = document.querySelector('.modal-btn');
 let closeBtn = document.querySelector('.close');
 let submitBtn = document.querySelector('.submit');
 
+// Stores Book objects
 let myLibrary = [];
 
 // Book constructor
@@ -32,6 +33,14 @@ function addBookToLibrary(title, author, pages, read) {
             newCell.textContent = book[prop];
         }   
     }
+
+    // Add delete button to end of row
+    let endCell = newRow.insertCell();
+    let deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete');
+    deleteBtn.textContent = 'Delete';   
+    endCell.append(deleteBtn);
+    endCell.style.textAlign = 'center';
 };
 
 // Deletes book from myLibrary and removes it from the table
@@ -53,13 +62,10 @@ closeBtn.addEventListener('click', () => {
 
 // Get new book when user submits form and add it to myLibrary
 submitBtn.addEventListener('click', function submitNewBook(event) {
-    event.preventDefault();
+    event.preventDefault(); // Prevent form from submitting
     let newTitle = document.querySelector('#title').value;
-    console.log(newTitle);
     let newAuthor = document.querySelector('#author').value;
-    console.log(newAuthor);
     let newPages = document.querySelector('#pages').value;
-    console.log(newPages);
     let newRead = document.querySelector('#read');
     if (newRead.checked) {
         newRead = 'read';
@@ -69,4 +75,11 @@ submitBtn.addEventListener('click', function submitNewBook(event) {
     console.log(newRead);
     addBookToLibrary(newTitle, newAuthor, newPages, newRead);
     modal.style.display = 'none';
+});
+
+// Delete book from library
+tableBody.addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete')) {
+        console.log('delete!');
+    }
 });
