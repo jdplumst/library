@@ -29,10 +29,20 @@ function addBookToLibrary(title, author, pages, read) {
     let newRow = tableBody.insertRow();
     newRow.setAttribute('index', myLibrary.length - 1);
     for (let prop in book) {
-        if (['title', 'author', 'pages', 'read'].includes(prop)) {
+        if (['title', 'author', 'pages'].includes(prop)) {
             let newCell = newRow.insertCell();
             newCell.textContent = book[prop];
-        }   
+            newCell.style.textAlign = 'center';
+        } else if (prop === 'read') {
+            let newCell= newRow.insertCell();
+            let readCheckbox = document.createElement('input');
+            readCheckbox.type = 'checkbox';
+            if (read === 'read') {
+                readCheckbox.checked = true;
+            }
+            newCell.append(readCheckbox);
+            newCell.style.textAlign = 'center';
+        }
     }
 
     // Add delete button to end of row
@@ -78,12 +88,22 @@ submitBtn.addEventListener('click', function submitNewBook(event) {
     modal.style.display = 'none';
 });
 
-// Delete book from library
+// Delete book from library or change read status of book
 tableBody.addEventListener('click', function(event) {
-    if (event.target.classList.contains('delete')) {
+    if (event.target.classList.contains('delete')) { // Delete book from library
         let tableRow = event.target.parentElement.parentElement;
         let bookIndex = tableRow.getAttribute('index');
         tableRow.parentElement.removeChild(tableRow);
         delete myLibrary[bookIndex];
+    } else if (event.target.type === 'checkbox') { // Change read status of book
+        let tableRow = event.target.parentElement.parentElement;
+        let bookIndex = tableRow.getAttribute('index');
+        if (myLibrary[bookIndex].read === 'read') {
+            event.target.checked = false;
+            myLibrary[bookIndex].read = 'not read';
+        } else {
+            event.target.checked = true;
+            myLibrary[bookIndex].read = 'read';
+        }
     }
 });
