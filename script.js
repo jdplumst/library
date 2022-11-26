@@ -1,4 +1,6 @@
 let tableBody = document.querySelector('tbody');
+let modal = document.querySelector('.modal');
+let modalBtn = document.querySelector('.modal-btn');
 
 let myLibrary = [];
 
@@ -36,3 +38,7 @@ function removeBookFromLibrary(index) {
     // from the list, keeping the list length the same
     delete myLibrary[index];
 }
+
+modalBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+});
