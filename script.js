@@ -2,6 +2,7 @@ let tableBody = document.querySelector('tbody');
 let modal = document.querySelector('.modal');
 let modalBtn = document.querySelector('.modal-btn');
 let closeBtn = document.querySelector('.close');
+let submitBtn = document.querySelector('.submit');
 
 let myLibrary = [];
 
@@ -48,4 +49,24 @@ modalBtn.addEventListener('click', () => {
 // Close modal
 closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
-})
+});
+
+// Get new book when user submits form and add it to myLibrary
+submitBtn.addEventListener('click', function submitNewBook(event) {
+    event.preventDefault();
+    let newTitle = document.querySelector('#title').value;
+    console.log(newTitle);
+    let newAuthor = document.querySelector('#author').value;
+    console.log(newAuthor);
+    let newPages = document.querySelector('#pages').value;
+    console.log(newPages);
+    let newRead = document.querySelector('#read');
+    if (newRead.checked) {
+        newRead = 'read';
+    } else {
+        newRead = 'not read';
+    }
+    console.log(newRead);
+    addBookToLibrary(newTitle, newAuthor, newPages, newRead);
+    modal.style.display = 'none';
+});
