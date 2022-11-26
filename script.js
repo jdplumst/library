@@ -3,6 +3,7 @@ let modal = document.querySelector('.modal');
 let modalBtn = document.querySelector('.modal-btn');
 let closeBtn = document.querySelector('.close');
 let submitBtn = document.querySelector('.submit');
+let form = document.querySelector('form');
 
 // Stores Book objects
 let myLibrary = [];
@@ -50,9 +51,10 @@ function removeBookFromLibrary(index) {
     delete myLibrary[index];
 }
 
-// Display modal
+// Display modal and reset form
 modalBtn.addEventListener('click', () => {
     modal.style.display = 'block';
+    form.reset();
 });
 
 // Close modal
@@ -72,7 +74,6 @@ submitBtn.addEventListener('click', function submitNewBook(event) {
     } else {
         newRead = 'not read';
     }
-    console.log(newRead);
     addBookToLibrary(newTitle, newAuthor, newPages, newRead);
     modal.style.display = 'none';
 });
