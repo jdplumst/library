@@ -13,6 +13,7 @@ function Book(title, author, pages, read) {
     }
 };
 
+// Adds new book to myLibrary and adds it to table
 function addBookToLibrary(title, author, pages, read) {
     // Create new book
     let book = new Book(title, author, pages, read);
@@ -20,6 +21,7 @@ function addBookToLibrary(title, author, pages, read) {
 
     // Add new book to table
     let newRow = tableBody.insertRow();
+    newRow.setAttribute('index', myLibrary.length);
     for (let prop in book) {
         if (['title', 'author', 'pages', 'read'].includes(prop)) {
             let newCell = newRow.insertCell();
@@ -27,3 +29,10 @@ function addBookToLibrary(title, author, pages, read) {
         }   
     }
 };
+
+// Deletes book from myLibrary and removes it from the table
+function removeBookFromLibrary(index) {
+    // This only deletes the instance of the book object but does not remove it
+    // from the list, keeping the list length the same
+    delete myLibrary[index];
+}
