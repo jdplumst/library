@@ -26,7 +26,7 @@ function addBookToLibrary(title, author, pages, read) {
 
     // Add new book to table
     let newRow = tableBody.insertRow();
-    newRow.setAttribute('index', myLibrary.length);
+    newRow.setAttribute('index', myLibrary.length - 1);
     for (let prop in book) {
         if (['title', 'author', 'pages', 'read'].includes(prop)) {
             let newCell = newRow.insertCell();
@@ -80,6 +80,9 @@ submitBtn.addEventListener('click', function submitNewBook(event) {
 // Delete book from library
 tableBody.addEventListener('click', function(event) {
     if (event.target.classList.contains('delete')) {
-        console.log('delete!');
+        let tableRow = event.target.parentElement.parentElement;
+        let bookIndex = tableRow.getAttribute('index');
+        tableRow.parentElement.removeChild(tableRow);
+        delete myLibrary[bookIndex];
     }
 });
