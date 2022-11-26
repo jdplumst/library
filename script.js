@@ -49,7 +49,7 @@ function removeBookFromLibrary(index) {
     // This only deletes the instance of the book object but does not remove it
     // from the list, keeping the list length the same
     delete myLibrary[index];
-}
+};
 
 // Display modal and reset form
 modalBtn.addEventListener('click', () => {
